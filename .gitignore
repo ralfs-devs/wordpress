@@ -1,0 +1,19 @@
+# Environment / secrets
+.env
+*.env
+
+# Docker volume data
+db_data/
+wp_data/
+
+# Logs
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node modules (falls installiert)
+node_modules/
