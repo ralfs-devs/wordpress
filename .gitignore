@@ -1,6 +1,6 @@
 # Environment / secrets
 .env
-*.env*
+*.env.*
 
 # Docker volume data
 db_data/
@@ -15,5 +15,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Node modules (falls installiert)
+# Node modules (if installed)
 node_modules/
