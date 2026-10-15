@@ -5,8 +5,7 @@
 1. [Description](#description)
 2. [Quickstart](#quickstart)
 3. [Usage](#usage)
-4. [Automated Testing](#automated-testing)
-5. [Files in Repository](#files-in-repository)
+4. [Files in Repository](#files-in-repository)
 
 ## Description
 
@@ -72,11 +71,20 @@ named volumes `wp_data` and `db_data`.
 
 Customization:
 
-- Change the published port by editing the `ports` mapping of the `wordpress` service.
-- Adjust database credentials in `.env` before the first start. Note: MySQL applies  
+- Change the published port by editing the `ports` mapping of the  
+`wordpress` service.
+- Adjust database credentials in `.env` before the first start. Note:  
+MySQL applies  
 these values only on initial volume creation; after changing them,  
 recreate the database volume.
-- Replace `wordpress:latest` with a pinned version tag for reproducible deployments.
+- The `wordpress` service uses a pinned version tag (`wordpress:7.1.3
+-apache`) for reproducible deployments. Both images are deliberately  
+pinned instead of using floating tags like `latest` to prevent  
+uncontrolled version drift.
+- To upgrade WordPress, change the image tag in `docker-compose.yaml`  
+and run `docker compose up -d`.  
+- Database images use fixed minor version tags (`mysql:8.0`)  
+to avoid incompatible major version jumps.
 
 Operations:
 
@@ -92,22 +100,6 @@ docker compose down      # stop and remove containers (volumes are kept)
 docker compose logs      # view service logs
 ```
 
-## Automated Testing
-
-The script `tests/e2e_check.sh` runs tests against the running setup:
-
-```bash
-./tests/e2e_check.sh http://<server-ip>:8080
-```
-
-Checks performed:
-
-1. Remote availability before shutdown — confirms WordPress is reachable
-2. Shutdown verification — site becomes unreachable after docker compose down
-3. Recovery — site comes back online with docker compose up -d
-4. Data persistence — test page content survives restart cycle
-5. Auto-restart — container recovers after crash test (kill 1)
-
 ## Files in Repository
 
 | File                   | Purpose                                                  |
@@ -115,5 +107,4 @@ Checks performed:
 | `docker-compose.yaml`  | Orchestration of the wordpress and db services           |
 | `example.env`          | Template for environment credentials (placeholders only) |
 | `.gitignore`           | Excludes secrets, volume data, and editor files          |
-| `tests/e2e_check.sh`   | Automated validation script                              |
 | `README.md`            | This documentation                                       |
