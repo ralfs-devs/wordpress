@@ -94,18 +94,19 @@ docker compose logs      # view service logs
 
 ## Automated Testing
 
-The script `tests/check_setup.sh` validates the running setup:
+The script `tests/e2e_check.sh` runs tests against the running setup:
 
 ```bash
-./tests/check_setup.sh http://<server-ip>:8080
+./tests/e2e_check.sh http://<server-ip>:8080
 ```
 
 Checks performed:
 
-1. Service availability (HTTP status 200 or 302)
-2. Containers are running
-3. Persistence volumes exist
-4. Restart policy is configured
+1. Remote availability before shutdown — confirms WordPress is reachable
+2. Shutdown verification — site becomes unreachable after docker compose down
+3. Recovery — site comes back online with docker compose up -d
+4. Data persistence — test page content survives restart cycle
+5. Auto-restart — container recovers after crash test (kill 1)
 
 ## Files in Repository
 
@@ -114,5 +115,5 @@ Checks performed:
 | `docker-compose.yaml`  | Orchestration of the wordpress and db services           |
 | `example.env`          | Template for environment credentials (placeholders only) |
 | `.gitignore`           | Excludes secrets, volume data, and editor files          |
-| `tests/check_setup.sh` | Automated validation script                              |
+| `tests/e2e_check.sh`   | Automated validation script                              |
 | `README.md`            | This documentation                                       |
