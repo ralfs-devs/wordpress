@@ -1,14 +1,5 @@
 # WordPress Docker Setup
 
-## Table of Contents
-
-1. [Description](#description)
-2. [Quickstart](#quickstart)
-3. [Usage](#usage)
-4. [Files in Repository](#files-in-repository)
-
-## Description
-
 This repository contains a Docker Compose setup for deploying  
 a self-hosted WordPress instance.
 
@@ -23,20 +14,24 @@ Purpose: development and testing environment for DevSecOps training,
 demonstrating container orchestration, secret handling via environment files,  
 persistent storage, and automatic restart policies.
 
+## Table of Contents
+
+1. [Quickstart](#quickstart)
+2. [Usage](#usage)
+3. [Files in Repository](#files-in-repository)
+
 ## Quickstart
 
-Prerequisites:
+Prerequisite:
 
 - Docker Engine with Compose plugin
-- Git
-- A reachable server or VM
 
 Steps:
 
 1. Clone the repository:
 
     ```bash
-    git clone -b feature/wordpress-setup \
+    git clone
     git@github.com:ralfs-devs/wordpress.git
     cd wordpress
     ```
@@ -48,7 +43,8 @@ Steps:
     nano .env
     ```
 
-   Important: `MYSQL_PASSWORD` and `WORDPRESS_DB_PASSWORD` must be identical.
+   > [!IMPORTANT]
+   > `MYSQL_PASSWORD` and `WORDPRESS_DB_PASSWORD` must be identical.
 
 3. Start the stack:
 
