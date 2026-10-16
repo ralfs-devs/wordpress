@@ -43,8 +43,8 @@ Steps:
     nano .env
     ```
 
-    > [!IMPORTANT]
-    > `MYSQL_PASSWORD` and `WORDPRESS_DB_PASSWORD` must be identical.
+    **Note:**  
+    `MYSQL_PASSWORD` and `WORDPRESS_DB_PASSWORD` must be identical.
 
 3. Start the stack:
 
